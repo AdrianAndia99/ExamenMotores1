@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
     public GameObject[] characters;
     private int currentCharacterIndex = 0;
     private Rigidbody rb;
-    public float speed = 5f;
+    public float speed = 10f;
     public float jumpForce = 3f;
     private Vector3 movementInput;
     private PlayerInput playerInput;
@@ -19,10 +19,9 @@ public class PlayerController : MonoBehaviour
         SwitchCharacter(currentCharacterIndex);
 
     }
-
     private void Update()
     {
-        Vector3 movement = new Vector3(movementInput.x, 0f, movementInput.y);
+        Vector3 movement = new Vector3(movementInput.x, rb.velocity.y, movementInput.y);
         rb.velocity = movement;
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -39,7 +38,6 @@ public class PlayerController : MonoBehaviour
             SwitchCharacter(currentCharacterIndex + 1);
         }
     }
-
     private void SwitchCharacter(int index)
     {
         characters[currentCharacterIndex].GetComponent<PlayerController>().enabled = false;
